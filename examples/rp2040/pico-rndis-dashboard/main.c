@@ -33,7 +33,7 @@ static void cb(struct mg_connection *con, int ev, void *ev_data,
     unsigned char buff[100] = {0};
     size_t buffindex = 0;
 
-    // send error response if no response was received after 50ms from main
+    // send error response if no response was received after 100ms from main
     // controller
     if (uart_is_readable_within_us(uart1, 100000)) {
       while (!(uart_getc(uart1) == '$')) {
@@ -45,6 +45,7 @@ static void cb(struct mg_connection *con, int ev, void *ev_data,
       for (int i = 0; i < 100; i++) {
         buff[i] = 0;
       }
+      r->len = 0;
       return;
     }
 
@@ -62,7 +63,7 @@ static void cb(struct mg_connection *con, int ev, void *ev_data,
     r->len = 0;
 
     buff[buffindex] = '\0';  // End string
-    MG_INFO(("received: %s", buff));
+    // MG_INFO(("received: %s", buff));
     mg_send(con, buff, buffindex);
   }
 }

@@ -7,7 +7,7 @@
 #include "pico/stdlib.h"
 #include "tusb.h"
 
-#define ERRORTIMEOUT "2;:"
+#define ERRORTIMEOUT "408;:"
 
 static struct mg_tcpip_if *s_ifp;
 
@@ -35,7 +35,7 @@ static void cb(struct mg_connection *con, int ev, void *ev_data,
 
     // send error response if no response was received after 100ms from main
     // controller
-    if (uart_is_readable_within_us(uart1, 100000)) {
+    if (uart_is_readable_within_us(uart1, 25000)) {
       while (!(uart_getc(uart1) == '$')) {
         ;
         ;

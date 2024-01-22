@@ -7,7 +7,7 @@
 #include "pico/stdlib.h"
 #include "tusb.h"
 
-#define ERRORTIMEOUT "408;:"
+#define ERRORTIMEOUT "504;:"
 
 static struct mg_tcpip_if *s_ifp;
 
